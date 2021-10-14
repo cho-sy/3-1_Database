@@ -11,3 +11,6 @@ begin
 END;
 //
 delimiter ;  
+call InsertBook(13, 'q', 'w', 25000);
+select * from book; 
+
