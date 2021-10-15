@@ -1,3 +1,4 @@
+use madang;
 #4-1
 select abs(-78), abs(78) from dual;
 
@@ -25,3 +26,12 @@ where publisher = '굿스포츠';
 select substr(name, 1,1), count(*)
 from customer
 group by substr(name, 1,1);
+
+#4-7
+select orderid, orderdate, adddate(orderdate, interval 10 day) as '확정' 
+from orders;
+
+#4-8
+select orderid, str_to_date(orderdate, '%Y-%M-%D'), custid, bookid
+from orders
+where orderdate like '2014-07-07';
