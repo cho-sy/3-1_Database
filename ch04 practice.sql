@@ -32,6 +32,17 @@ select orderid, orderdate, adddate(orderdate, interval 10 day) as '확정'
 from orders;
 
 #4-8
-select orderid, str_to_date(orderdate, '%Y-%M-%D'), custid, bookid
+select orderid, str_to_date(orderdate, '%Y-%m-%d') as '주문일', custid, bookid
 from orders
-where orderdate like '2014-07-07';
+where orderdate = date_format('20140707', '%Y%m%d');
+
+#4-9
+select sysdate(), date_format(sysdate(), '%Y/%m/%d %M %h:%s');
+
+#4-10
+select name, ifnull(phone, '연락처 없음') 
+from customer;
+
+#4-11
+set @seq:=0;
+select (@seq:=@seq+1) '순번', custid, name, phone from customer where @seq<2;
