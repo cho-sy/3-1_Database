@@ -7,7 +7,7 @@ begin
     select count(*) into mycount from book where bookname like myBookName;
     if mycount!=0 then
 		#set SQL_SAFE_UPDSTES = 0; # 삭제 수정 연산위해 필요함
-        update book set price=myprice where bookname like myBookName;
+        update book set price=myprice where bookname = myBookName;
 	else 
 		insert into Book(bookid, bookname, publisher, price) value (myBookID, myBookName, myPublisher, myPrice);
 	end if;

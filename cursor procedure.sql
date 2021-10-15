@@ -17,7 +17,7 @@ begin
         end if;
 	end Loop cursor_loop;
     Close InterestCursor;
-    Select concat('전체 이익 금액 =', myInterest);
+    Select concat('전체 이익 금액 =', myInterest) as '전체 이익 금액';
 end;
 //
 delimiter ;
