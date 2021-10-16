@@ -46,3 +46,45 @@ from customer;
 #4-11
 set @seq:=0;
 select (@seq:=@seq+1) '순번', custid, name, phone from customer where @seq<2;
+
+#4-12 
+select (select name from customer c where c.custid=o.custid) as 'name' , sum(saleprice) as 'total'
+from orders o
+group by custid;
+
+#4-13
+alter table orders add bname varchar(40);
+update orders set bname = (select bookname from book where book.bookid = orders.bookid); 
+alter table orders drop column bname;
+
+#4-14
+select c.name, sum(saleprice)
+from orders o, (select custid, name from customer where custid<=2) c
+where c.custid=o.custid
+group by c.name;
+
+#4-15
+select orderid, saleprice
+from orders
+where saleprice <= (select avg(saleprice) from orders);
+
+#4-16
+select orderid, custid, saleprice
+from orders o
+where saleprice > (select avg(saleprice) from orders o2 where o.custid=o2.custid)
+group by custid;
+
+#4-17
+select sum(saleprice)
+from orders
+where custid in (select custid from customer where address like '%대한민국%');
+
+#4-18 
+select orderid, saleprice
+from orders
+where saleprice > all (select saleprice from orders where custid='3'); 
+
+#4-19
+select sum(saleprice)
+from orders
+where exists (select * from customer where address like '%대한민국%' and customer.custid=orders.custid);
