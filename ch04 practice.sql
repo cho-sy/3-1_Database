@@ -88,3 +88,30 @@ where saleprice > all (select saleprice from orders where custid='3');
 select sum(saleprice)
 from orders
 where exists (select * from customer where address like '%대한민국%' and customer.custid=orders.custid);
+
+#4-20
+create view vw_Customer as select * from customer where address like '%대한민국%';
+
+#4-21
+drop view vw_O;
+create view vw_O(name, bookname, orderid, saleprice) as select c.name, b.bookname, orderid, saleprice from customer c, book b, orders o where c.custid = o.custid and o.bookid = b.bookid; 
+select orderid, bookname, saleprice from vw_O where name = '김연아';
+
+#4-22
+create or replace view vw_Customer(custid, name, address) as select custid, name, address from customer where address like '%영국%'; 
+
+#4-23
+drop view vw_Customer; 
+
+#4-24
+create index ix_Book on book(bookname); 
+
+#4-25
+create index ix_Book2 on book(publisher, price);
+
+#4-26
+analyze table book;
+
+#4-27
+drop index ix_Book on book;
+drop index ix_Book2 on book;
