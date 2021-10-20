@@ -115,3 +115,48 @@ analyze table book;
 #4-27
 drop index ix_Book on book;
 drop index ix_Book2 on book;
+
+#연습문제
+
+select str_to_date('12 05 2014', '%d %m %Y');
+select cast('12.3' as decimal(3,1));
+create table mybook(bookid int, price int);
+insert into mybook(bookid, price) values (1, 10000);
+insert into mybook(bookid, price) values (2, 20000);
+insert into mybook(bookid, price) values (3, null);
+select * from mybook;
+select bookid, ifnull(price, 0)
+from mybook;
+select *
+from mybook 
+where price is null;
+select *
+from mybook 
+where price = ' ';
+select bookid, price+100
+from mybook;
+select sum(price), avg(price), count(*)
+from mybook
+where bookid >= 4;
+select count(*), count(price)
+from mybook;
+select sum(price), avg(price)
+from mybook;
+set @RNUM = 0;
+
+-- (1)
+select *
+from book;
+
+select *, @RNUM := @RNUM + 1 as ROWNUM
+from book, (select @RNUM := 1) R
+where @RNUM <= 5;
+
+select *, @RNUM := @RNUM + 1 as rownum
+from book, (select @RNUM := 1) R
+where @RNUM <= 5
+order by price;
+
+create view highorders as select bookid, bookname, name, publisher, price from customer, book where price>=20000;
+select bookname, name from highorders;
+create or replace view highorders as select bookid, bookname, name from customer, book where price>=20000;

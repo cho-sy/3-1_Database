@@ -78,3 +78,5 @@ CREATE TABLE Imported_Book (
 INSERT INTO Imported_Book VALUES(21, 'Zen Golf', 'Pearson', 12000);
 INSERT INTO Imported_Book VALUES(22, 'Soccer Skills', 'Human Kinetics', 15000);
 commit;
+
+ALTER SCHEMA madang  DEFAULT CHARACTER SET utf8 ;
