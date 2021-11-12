@@ -32,7 +32,6 @@ select orderid, orderdate, adddate(orderdate, interval 10 day) as '확정'
 from orders;
 
 #4-8
-
 select orderid, str_to_date(orderdate, '%Y-%m-%d') as '주문일', custid, bookid
 from orders
 where orderdate = date_format('20140707', '%Y%m%d');
